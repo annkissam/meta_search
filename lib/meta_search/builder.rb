@@ -275,6 +275,8 @@ module MetaSearch
           'stashed_join'
         when Arel::Nodes::Join
           'join_node'
+        when Squeel::Nodes::KeyPath, Squeel::Nodes::Join, Squeel::Nodes::Stub
+          'association_join'
         else
           raise 'unknown class: %s' % join.class.name
         end
