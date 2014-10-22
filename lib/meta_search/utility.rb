@@ -96,12 +96,13 @@ module MetaSearch
           cast = %w(a s i).include?(position.last) ? position.last : nil
           position = position.to_i - 1
           value = opts.delete(k)
-          opts[real_attribute] ||= []
-          opts[real_attribute][position] = if cast
+          attributes = opts[real_attribute] || []
+          attributes[position] = if cast
             (value.blank? && cast == 'i') ? nil : value.send("to_#{cast}")
           else
             value
           end
+          opts[real_attribute] = attributes
         end
       end
       opts
